@@ -1,0 +1,24 @@
+/*
+  Project: React Layout Test
+  Start date: December, 03, 2016
+  Author: João Marcus de Lemos Fernandes
+  Github: @joaomarcuslf
+*/
+
+/*
+  Importing Bulma in the top level of the application
+*/
+@import '../../node_modules/bulma/bulma';
+
+/*
+  Using ITCSS Structure in imports
+*/
+
+@import
+  'settings/settings',
+  'tools/tools',
+  'generic/generic',
+  'elements/elements',
+  'objects/objects',
+  'components/components',
+  'trumps/trumps';

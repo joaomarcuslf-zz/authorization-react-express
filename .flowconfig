@@ -1,0 +1,11 @@
+[ignore]
+.*/node_modules/*
+.*/assets/*
+.*/public/*
+.*.json*
+.*webpack*
+.*gulpfile*
+[include]
+[libs]
+
+[options]
