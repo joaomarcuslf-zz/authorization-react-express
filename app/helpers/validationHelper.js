@@ -11,15 +11,15 @@ class ValidationHelper {
 	filterErrors(body, validations) {
 		/*
 			@params:
-				validatios: array,
-				body: object
+				body: object,
+				validatios: array
 
 			should filter the array into only non valid fields
 		*/
 
-		return validations.filter((validates) => {
-			return (body[validates.field] === undefined) ? true : false;
-		});
+		let clause = validate => (body[validate.field] === undefined);
+
+		return R.filter(clause, validations);
 	}
 
 	hasErrors(errors) {
