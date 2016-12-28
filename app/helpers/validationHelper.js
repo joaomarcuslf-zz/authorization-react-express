@@ -1,6 +1,14 @@
-class ValidationHelper {
+let R = require('ramda');
 
-	filterErrors(validations, body) {
+class ValidationHelper {
+	constructor() {
+		this.validate = R.compose(
+			this.hasErrors,
+			this.filterErrors
+		);
+	}
+
+	filterErrors(body, validations) {
 		/*
 			@params:
 				validatios: array,
@@ -10,12 +18,19 @@ class ValidationHelper {
 		*/
 
 		return validations.filter((validates) => {
-			if (body[validates.field] === undefined) {
-				return true;
-			}
-
-			return false;
+			return (body[validates.field] === undefined) ? true : false;
 		});
+	}
+
+	hasErrors(errors) {
+		/*
+			@params
+				errors: arrays
+
+			should return the errors array if there is errors or false if don't
+		*/
+
+		return (errors.length) ? errors : false;
 	}
 
 	validateFields(checkObject, validationsArray) {
@@ -27,13 +42,7 @@ class ValidationHelper {
 			should iterate on validatios and create the object of errors
 		*/
 
-		let errors = this.filterErrors(validationsArray, checkObject);
-
-		if (errors.length) {
-      return errors;
-		}
-
-		return false;
+		return this.validate(checkObject, validationsArray);
 	}
 }
 
