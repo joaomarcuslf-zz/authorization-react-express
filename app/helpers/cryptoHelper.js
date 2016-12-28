@@ -23,7 +23,6 @@ class CryptoHelper {
 	}
 
 	generatePasswordHash(password) {
-
 		/*
 			@params:
 				password: string
