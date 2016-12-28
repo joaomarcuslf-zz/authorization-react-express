@@ -24,9 +24,11 @@ consign({
   loggingType: 'info'
 })
   .include('app/routes')
+  .then('configs/dbConnection.js')
   .then('app/models')
   .then('app/controllers')
   .then('app/constants')
+  .then('app/helpers')
   .into(application);
 
 application.use((request, response) => {
@@ -38,7 +40,7 @@ application.use((request, response) => {
 
   response
     .status(notFoundResource.status)
-    .end(JSON.stringify(notFoundResource));
+    .send(notFoundResource);
 });
 
 module.exports = application;
