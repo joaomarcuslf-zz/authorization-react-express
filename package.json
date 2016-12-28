@@ -52,7 +52,6 @@
     "imports-loader": "~0.6.3",
     "mocha": "^2.5.3",
     "nodemon": "^1.11.0",
-    "surge": "^0.18.0",
     "webpack": "~1.4.13"
   },
   "scripts": {
@@ -67,12 +66,9 @@
     "bundle:scss": "gulp bundle:scss",
     "dev-server": "nodemon index.js",
     "watch:js": "webpack --config ./webpack.config.js --watch --colors",
-    "deploy:js": "webpack --minimize --output-path deploy/build",
-    "deploy": "gulp pre:deploy && npm run deploy:js && gulp deploy && npm run publish",
     "increse:major": "gulp increase:major",
     "increse:minor": "gulp increase:minor",
-    "increse:release": "gulp increase:release",
-    "publish": "surge -p deploy -d project-name.surge.sh"
+    "increse:release": "gulp increase:release"
   },
   "author": "João Marcus Fernandes <jmarcusfernandes@gmail.com>",
   "license": "MIT",
