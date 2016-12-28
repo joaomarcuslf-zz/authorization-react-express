@@ -2,7 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const consign = require('consign');
 const bodyParser = require('body-parser');
-const expressValidator = require('express-validator');
 
 const application = express();
 
@@ -14,8 +13,6 @@ application.use(morgan('dev'));
 
 application.use(bodyParser.urlencoded({extended: true}));
 application.use(bodyParser.json());
-
-application.use(expressValidator());
 
 consign({
   logger: console,
