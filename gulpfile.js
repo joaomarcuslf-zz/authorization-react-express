@@ -9,7 +9,6 @@ const sass = require('gulp-sass');
 const exec = require('child_process').exec;
 const cssBeautify = require('gulp-cssbeautify');
 const cssComb = require('gulp-csscomb');
-const imagemin = require('gulp-imagemin');
 const fs = require('fs-extra');
 
 /* Tasks */
