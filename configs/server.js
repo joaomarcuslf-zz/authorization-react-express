@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
-const consign = require('consign');
 const bodyParser = require('body-parser');
+const expressSession = require('express-session');
 
 const application = express();
 
@@ -14,25 +14,22 @@ application.use(morgan('dev'));
 application.use(bodyParser.urlencoded({extended: true}));
 application.use(bodyParser.json());
 
-consign({
-  logger: console,
-  verbose: true,
-  extensions: ['.js', '.json'],
-  loggingType: 'info'
-})
-  .include('app/routes')
-  .then('configs/dbConnection.js')
-  .then('app/models')
-  .then('app/controllers')
-  .then('app/constants')
-  .then('app/helpers')
-  .into(application);
+application.use(expressSession({
+	secret: 'randomSecret',
+	resave: false,
+	saveUninitialized: false
+}));
+
+require('../app/routes/auth')(application);
+require('../app/routes/home')(application);
+let errorsConstants = require('../app/constants/error');
+let httpStatus = require('../app/constants/httpStatus');
 
 application.use((request, response) => {
   let notFoundResource = {
-    status: application.app.constants.httpStatus.NOT_FOUND,
-    error: application.app.constants.error.NOT_FOUND_RESOURCE,
-    message: application.app.constants.error.NOT_FOUND_MESSAGE
+    status: httpStatus.NOT_FOUND,
+    error: errorsConstants.NOT_FOUND_RESOURCE,
+    message: errorsConstants.NOT_FOUND_MESSAGE
   };
 
   response

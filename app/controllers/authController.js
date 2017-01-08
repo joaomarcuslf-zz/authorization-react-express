@@ -1,6 +1,12 @@
-class AuthController {
+const errorsConstants = require('../constants/error');
+const httpStatus = require('../constants/httpStatus');
+const cryptHelper = require('../helpers/cryptoHelper');
+const validationHelper = require('../helpers/validationHelper');
+const dbConnection = require('../../configs/dbConnection');
+const userModel = require('../models/user')(dbConnection);
 
-	login(app, request, response) {
+class AuthController {
+	login(request, response) {
 		/*
 			@params:
 				app: object
@@ -12,12 +18,6 @@ class AuthController {
 			if it exists and is valid, should generate the user token and save on server cache
 			if it does not, it should notify with unauthorized
 		*/
-
-		let errorsConstants = app.app.constants.error;
-		let httpStatus = app.app.constants.httpStatus;
-		let cryptHelper = app.app.helpers.cryptoHelper;
-		let validationHelper = app.app.helpers.validationHelper;
-		let userModel = app.app.models.user;
 
 		let hasErrors = validationHelper.validateFields(
 			request.body,
@@ -40,12 +40,10 @@ class AuthController {
 
 		function authorizeSucess(data) {
 			let loggedDate = new Date();
-			let token = cryptHelper.generateToken(loggedDate.getTime());
 
 			let loggedUser = {
 				username: login.username,
-				date: loggedDate,
-				token: token
+				date: loggedDate
 			};
 
 			response.status(httpStatus.SUCCESS)
@@ -68,7 +66,7 @@ class AuthController {
 		);
 	}
 
-	signup(app, request, response) {
+	signup(request, response) {
 		/*
 			@params:
 				app: object
@@ -80,12 +78,6 @@ class AuthController {
 			if it exists should notify conflict user
 			if it does not, should create the user
 		*/
-
-		let errorsConstants = app.app.constants.error;
-		let httpStatus = app.app.constants.httpStatus;
-		let cryptHelper = app.app.helpers.cryptoHelper;
-		let validationHelper = app.app.helpers.validationHelper;
-		let userModel = app.app.models.user;
 
     let hasErrors = validationHelper.validateFields(
 			request.body,

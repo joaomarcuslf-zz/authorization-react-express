@@ -1,5 +1,5 @@
 class HomeController {
-	getRoot(app, request, response) {
+	getRoot(request, response) {
 		response.sendFile('index.html');
 	}
 }

@@ -10,6 +10,4 @@ const connMongoDB = function(){
 	return db;
 }
 
-module.exports = function () {
-	return connMongoDB;
-};
+module.exports = connMongoDB;

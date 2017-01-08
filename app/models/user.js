@@ -45,7 +45,7 @@ class User {
 	}
 }
 
-module.exports = function (app) {
-	return new User(app.configs.dbConnection);
+module.exports = function (dbConnection) {
+	return new User(dbConnection);
 };
 
