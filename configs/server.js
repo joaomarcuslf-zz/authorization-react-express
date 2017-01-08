@@ -20,10 +20,26 @@ application.use(expressSession({
 	saveUninitialized: false
 }));
 
-require('../app/routes/auth')(application);
-require('../app/routes/home')(application);
 let errorsConstants = require('../app/constants/error');
 let httpStatus = require('../app/constants/httpStatus');
+
+application.all('/*', function(request, response, next) {
+  // CORS headers
+  response.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
+  response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  // Set custom headers for CORS
+  response.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
+  if (request.method == 'OPTIONS') {
+    response.status(httpStatus.SUCCESS).end();
+  } else {
+    next();
+  }
+});
+
+application.all('/api/v1/*', [require('../app/middlewares/validateRequest')]);
+
+require('../app/routes/auth')(application);
+require('../app/routes/home')(application);
 
 application.use((request, response) => {
   let notFoundResource = {

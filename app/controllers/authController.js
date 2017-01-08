@@ -4,6 +4,26 @@ const cryptHelper = require('../helpers/cryptoHelper');
 const validationHelper = require('../helpers/validationHelper');
 const dbConnection = require('../../configs/dbConnection');
 const userModel = require('../models/user')(dbConnection);
+let jwt = require('jwt-simple');
+
+// private method
+function expiresIn(numDays) {
+  let dateObj = new Date();
+  return dateObj.setDate(dateObj.getDate() + numDays);
+}
+
+function genToken(user) {
+  let expires = expiresIn(7); // 7 days
+  let token = jwt.encode({
+    exp: expires
+  }, 'super.super.secret.shhh');
+
+  return {
+    token: token,
+    expires: expires,
+    user: user
+  };
+}
 
 class AuthController {
 	login(request, response) {
@@ -39,15 +59,15 @@ class AuthController {
 		};
 
 		function authorizeSucess(data) {
-			let loggedDate = new Date();
+			/*let loggedDate = new Date();
 
 			let loggedUser = {
 				username: login.username,
 				date: loggedDate
-			};
+			};*/
 
 			response.status(httpStatus.SUCCESS)
-				.send(loggedUser);
+				.send(genToken(data));
 		}
 
 		function authorizeError() {
