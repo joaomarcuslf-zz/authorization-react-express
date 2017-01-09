@@ -16,12 +16,19 @@ function genToken(user) {
   let expires = expiresIn(7); // 7 days
   let token = jwt.encode({
     exp: expires
-  }, 'super.super.secret.shhh');
+	}, 'super.super.secret.shhh');
+
+	let loggedDate = new Date();
+
+	let loggedUser = {
+		username: user.username,
+		date: loggedDate
+	}
 
   return {
     token: token,
     expires: expires,
-    user: user
+    user: loggedUser
   };
 }
 
@@ -32,6 +39,10 @@ class AuthController {
 				app: object
 				request: object
 				response: object
+
+			@body:
+				username
+				password
 
 			should validate se request body values then
 			check if the user exists on the db
@@ -59,13 +70,6 @@ class AuthController {
 		};
 
 		function authorizeSucess(data) {
-			/*let loggedDate = new Date();
-
-			let loggedUser = {
-				username: login.username,
-				date: loggedDate
-			};*/
-
 			response.status(httpStatus.SUCCESS)
 				.send(genToken(data));
 		}
@@ -92,6 +96,11 @@ class AuthController {
 				app: object
 				request: object
 				response: object
+
+			@body:
+				username
+				password
+				email
 
 			should validate se request body values then
 			check if the user exists on the db
