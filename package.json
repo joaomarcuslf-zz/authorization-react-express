@@ -10,7 +10,7 @@
     "foreman": "^2.0.0"
   },
   "scripts": {
-    "start": "npm run start-api && npm run start-webapp",
+    "start": "npm install --silent && npm run start-api && npm run start-webapp",
     "start-api": "cd authorization-express-api && npm install --silent",
     "start-webapp": "cd authorization-react-webapp && npm install --silent",
     "dev": "nf start"
