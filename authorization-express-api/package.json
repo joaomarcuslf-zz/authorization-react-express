@@ -4,8 +4,8 @@
   "description": "Authorization Express API",
   "main": "index.js",
   "engines": {
-    "node": "6.3.1",
-    "npm": "4.0.2"
+    "node": "7.4.0",
+    "npm": "4.0.5"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
