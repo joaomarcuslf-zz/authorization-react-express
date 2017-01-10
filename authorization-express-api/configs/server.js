@@ -1,7 +1,7 @@
+"use strict"
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const expressSession = require('express-session');
 
 const application = express();
 
@@ -14,32 +14,37 @@ application.use(morgan('dev'));
 application.use(bodyParser.urlencoded({extended: true}));
 application.use(bodyParser.json());
 
-application.use(expressSession({
-	secret: 'randomSecret',
-	resave: false,
-	saveUninitialized: false
-}));
-
 let errorsConstants = require('../app/constants/error');
 let httpStatus = require('../app/constants/httpStatus');
 
-application.all('/*', function(request, response, next) {
-  // CORS headers
-  response.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
+application.use(function (request, response, next) {
+  // Allow CORS middleware
+  response.header("Access-Control-Allow-Origin", "*");
   response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  // Set custom headers for CORS
-  response.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
-  if (request.method == 'OPTIONS') {
-    response.status(httpStatus.SUCCESS).end();
+  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+  next();
+});
+
+application.use(function (request, response, next) {
+  if (request.url === '/favicon.ico') {
+    // No favicon middleware
+    response.writeHead(
+      httpStatus.SUCCESS,
+      { 'Content-Type': 'image/x-icon' }
+    );
+
+    response.end('');
   } else {
     next();
   }
 });
 
-application.all('/api/v1/*', [require('../app/middlewares/validateRequest')]);
-
-require('../app/routes/auth')(application);
-require('../app/routes/home')(application);
+require('../app/routes/auth')(
+  'api',
+  'v1',
+  application
+);
 
 application.use((request, response) => {
   let notFoundResource = {

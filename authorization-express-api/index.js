@@ -1,5 +1,5 @@
 const APP = require('./configs/server');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const IP_BIND = process.env.IP || '0.0.0.0';
 
 String.prototype.format = function () {

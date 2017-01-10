@@ -1,0 +1,68 @@
+{
+  "name": "authorization-react-webapp",
+  "version": "0.0.1",
+  "description": "Authorization React Webapp",
+  "main": "index.js",
+  "engines": {
+    "node": "6.3.1",
+    "npm": "4.0.2"
+  },
+  "dependencies": {
+    "bulma": "^0.2.3",
+    "flux": "^3.1.0",
+    "history": "^1.17.0",
+    "mori": "^0.3.2",
+    "ramda": "^0.22.1",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-router": "^3.0.0",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-eslint": "^6.0.2",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-transform-flow-strip-types": "^6.18.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.16.0",
+    "chai": "^3.5.0",
+    "eslint": "^2.7.0",
+    "eslint-loader": "^1.3.0",
+    "eslint-plugin-flowtype": "^2.25.0",
+    "eslint-plugin-react": "^6.4.1",
+    "fetch-mock": "^5.6.2",
+    "flow-bin": "^0.34.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssbeautify": "^0.1.3",
+    "gulp-csscomb": "^3.0.8",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-util": "^3.0.7",
+    "mocha": "^2.5.3",
+    "webpack": "~1.4.13"
+  },
+  "scripts": {
+    "start": "npm run build && npm run dev",
+    "build": "gulp run:build",
+    "build:js": "webpack --minimize",
+    "bundle:js": "webpack",
+    "build:scss": "gulp build:scss",
+    "bundle:scss": "gulp bundle:scss",
+    "watch:js": "webpack --config ./webpack.config.js --watch --colors",
+    "dev": "webpack-dev-server --hot --inline --color --port 3000 --host 0.0.0.0 --output-public-path=/build/ --content-base ./"
+  },
+  "author": "João Marcus Fernandes <jmarcusfernandes@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "webpack",
+    "gulp",
+    "ecma6",
+    "ecmascript2015"
+  ]
+}

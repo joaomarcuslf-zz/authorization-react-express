@@ -9,16 +9,11 @@ const sass = require('gulp-sass');
 const exec = require('child_process').exec;
 const cssBeautify = require('gulp-cssbeautify');
 const cssComb = require('gulp-csscomb');
-const fs = require('fs-extra');
 
 /* Tasks */
 
 gulp.task('default', () => {
   gutil.log('Gulp is working fine');
-});
-
-gulp.task('advice:server', () => {
-  gutil.log('Run', gutil.colors.red('npm run server'), 'to start the application');
 });
 
 // Bundle
@@ -97,42 +92,4 @@ gulp.task('run:test', () => {
   			js: babel
   		}
   	}));
-});
-
-function increaseVersion(version, index) {
-  let splittedVersion = version.split('.');
-
-  splittedVersion[index] = parseInt(splittedVersion[index]) + 1;
-
-  if (index === 0) {
-    splittedVersion[1] = 0;
-    splittedVersion[2] = 0;
-  }
-  else if (index === 1) {
-    splittedVersion[2] = 0;
-  }
-
-  return splittedVersion.join('.');
-}
-
-function releaseVersion(index) {
-  fs.readJson('./package.json', function (err, projectPackage) {
-    projectPackage.version = increaseVersion(projectPackage.version, index);
-
-    fs.writeJsonSync('./package.json', projectPackage);
-
-    gutil.log('New version:', gutil.colors.green(projectPackage.version));
-  });
-}
-
-gulp.task('increase:major', () => {
-  return releaseVersion(0);
-});
-
-gulp.task('increase:minor', () => {
-  return releaseVersion(1);
-});
-
-gulp.task('increase:release', () => {
-  return releaseVersion(2);
 });
