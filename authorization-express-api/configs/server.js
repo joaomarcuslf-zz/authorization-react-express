@@ -2,6 +2,10 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cors = require('../app/middlewares/allowCors');
+const noIcon = require('../app/middlewares/noIcon');
+const errorsConstants = require('../app/constants/error');
+const httpStatus = require('../app/constants/httpStatus');
 
 const application = express();
 
@@ -14,31 +18,8 @@ application.use(morgan('dev'));
 application.use(bodyParser.urlencoded({extended: true}));
 application.use(bodyParser.json());
 
-let errorsConstants = require('../app/constants/error');
-let httpStatus = require('../app/constants/httpStatus');
-
-application.use(function (request, response, next) {
-  // Allow CORS middleware
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-
-  next();
-});
-
-application.use(function (request, response, next) {
-  if (request.url === '/favicon.ico') {
-    // No favicon middleware
-    response.writeHead(
-      httpStatus.SUCCESS,
-      { 'Content-Type': 'image/x-icon' }
-    );
-
-    response.end('');
-  } else {
-    next();
-  }
-});
+application.use(cors());
+application.use(noIcon());
 
 require('../app/routes/auth')(
   'api',
