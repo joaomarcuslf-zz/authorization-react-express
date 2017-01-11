@@ -2,7 +2,7 @@ let httpStatus = require('../constants/httpStatus');
 let errorContants = require('../constants/error');
 
 module.exports = function (request, response, next) {
-	'use strict'
+	'use strict';
 
 	if (request.url.includes('login')) {
 		next();

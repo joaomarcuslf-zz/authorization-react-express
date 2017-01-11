@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const APP = require('./configs/server');
 const PORT = process.env.PORT || 8080;

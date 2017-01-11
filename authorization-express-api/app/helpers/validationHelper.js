@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 let R = require('ramda');
 
 class ValidationHelper {

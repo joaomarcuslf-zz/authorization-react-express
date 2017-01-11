@@ -1,5 +1,5 @@
 module.exports = function () {
-	'use strict'
+	'use strict';
 
 	return function (request, response, next) {
 		// Allow CORS middleware

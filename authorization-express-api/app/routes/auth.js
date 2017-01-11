@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 let authController = require('../controllers/authController');
 
 module.exports = function (organization, version, app) {

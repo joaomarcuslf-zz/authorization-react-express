@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 let crypto = require('crypto');
 
 class CryptoHelper {

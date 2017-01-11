@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const errorsConstants = require('../constants/error');
 const httpStatus = require('../constants/httpStatus');
 const cryptHelper = require('../helpers/cryptoHelper');
