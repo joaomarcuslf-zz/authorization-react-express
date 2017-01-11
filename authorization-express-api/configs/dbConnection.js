@@ -1,3 +1,5 @@
+'use strict'
+
 const mongo = require('mongodb');
 
 const connMongoDB = function(){

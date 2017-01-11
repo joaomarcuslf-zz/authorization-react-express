@@ -1,4 +1,6 @@
 module.exports = function () {
+	'use strict'
+
 	return function (request, response, next) {
 		// Allow CORS middleware
 		response.header("Access-Control-Allow-Origin", "*");

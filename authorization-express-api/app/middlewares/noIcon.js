@@ -1,4 +1,6 @@
 module.exports = function () {
+	'use strict'
+
 	return function (request, response, next) {
 		if (request.url === '/favicon.ico') {
 			// No favicon middleware

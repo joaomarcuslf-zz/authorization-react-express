@@ -2,6 +2,8 @@ let httpStatus = require('../constants/httpStatus');
 let errorContants = require('../constants/error');
 
 module.exports = function (request, response, next) {
+	'use strict'
+
 	if (request.url.includes('login')) {
 		next();
 	} else {
