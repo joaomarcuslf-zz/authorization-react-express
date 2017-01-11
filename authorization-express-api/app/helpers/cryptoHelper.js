@@ -33,18 +33,6 @@ class CryptoHelper {
 
 		return this.crypt(password, 'sha256');
 	}
-
-	generateToken(rawData = new Date().getTime()) {
-		/*
-			@params:
-				rawData: any
-					-> default: new date timestamp
-
-			must generate a token with the raw data on the output
-		*/
-
-		return this.crypt(rawData.toString(), 'md5');
-	}
 }
 
 module.exports = new CryptoHelper(crypto);

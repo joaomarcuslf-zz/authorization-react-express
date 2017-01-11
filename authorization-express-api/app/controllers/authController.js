@@ -1,12 +1,11 @@
 'use strict';
 const errorsConstants = require('../constants/error');
 const httpStatus = require('../constants/httpStatus');
+const tokenHelper = require('../helpers/tokenHelper');
 const cryptHelper = require('../helpers/cryptoHelper');
 const validationHelper = require('../helpers/validationHelper');
-const tokenConfig = require('../../configs/tokenConfig');
 const dbConnection = require('../../configs/dbConnection');
 const userModel = require('../models/user')(dbConnection);
-const jwt = require('jwt-simple');
 
 function genToken(user) {
   let loggedDate = new Date();
@@ -16,7 +15,7 @@ function genToken(user) {
 		date: loggedDate
 	}
 
-	let token = jwt.encode(loggedUser, tokenConfig.secret);
+	let token = tokenHelper.generateToken(loggedUser);
 
   return {
     token: token,
