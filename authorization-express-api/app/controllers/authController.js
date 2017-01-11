@@ -4,19 +4,10 @@ const cryptHelper = require('../helpers/cryptoHelper');
 const validationHelper = require('../helpers/validationHelper');
 const dbConnection = require('../../configs/dbConnection');
 const userModel = require('../models/user')(dbConnection);
-let jwt = require('jwt-simple');
-
-// private method
-function expiresIn(numDays) {
-  let dateObj = new Date();
-  return dateObj.setDate(dateObj.getDate() + numDays);
-}
+const jwt = require('jwt-simple');
 
 function genToken(user) {
-  let expires = expiresIn(7); // 7 days
-  let token = jwt.encode({
-    exp: expires
-	}, 'super.super.secret.shhh');
+  let token = jwt.encode({}, 'super.super.secret.shhh');
 
 	let loggedDate = new Date();
 
@@ -27,7 +18,6 @@ function genToken(user) {
 
   return {
     token: token,
-    expires: expires,
     user: loggedUser
   };
 }
@@ -74,7 +64,7 @@ class AuthController {
 				.send(genToken(data));
 		}
 
-		function authorizeError() {
+		function authorizeError(err) {
 			response.status(httpStatus.UNAUTHORIZED)
 				.send({
 					error: errorsConstants.UNAUTHORIZED,
@@ -83,11 +73,10 @@ class AuthController {
 			return;
 		}
 
-		userModel.authorize(
-			login,
-			authorizeSucess,
-			authorizeError
-		);
+		userModel
+			.findUser(login)
+			.then(authorizeSucess)
+			.catch(authorizeError);
 	}
 
 	signup(request, response) {
@@ -108,7 +97,7 @@ class AuthController {
 			if it does not, should create the user
 		*/
 
-    let hasErrors = validationHelper.validateFields(
+		let hasErrors = validationHelper.validateFields(
 			request.body,
 			[
 				{ field: 'username', message: 'Username can\'t be empty' },
@@ -144,11 +133,14 @@ class AuthController {
 			return;
 		}
 
-		userModel.findUser(
-			{ username: user.username },
-			insertError, // Conflict User
-			() => userModel.insert(user, insertSuccess)
-		);
+		userModel
+			.findUser({ username: user.username })
+			.then(insertError)
+			.catch(function () {
+				userModel
+					.insert(user)
+					.then(insertSuccess);
+			});
 	}
 }
 
