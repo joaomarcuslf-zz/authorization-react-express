@@ -1,20 +1,22 @@
+'use stric'
 const errorsConstants = require('../constants/error');
 const httpStatus = require('../constants/httpStatus');
 const cryptHelper = require('../helpers/cryptoHelper');
 const validationHelper = require('../helpers/validationHelper');
+const tokenConfig = require('../../configs/tokenConfig');
 const dbConnection = require('../../configs/dbConnection');
 const userModel = require('../models/user')(dbConnection);
 const jwt = require('jwt-simple');
 
 function genToken(user) {
-  let token = jwt.encode({}, 'super.super.secret.shhh');
-
-	let loggedDate = new Date();
+  let loggedDate = new Date();
 
 	let loggedUser = {
 		username: user.username,
 		date: loggedDate
 	}
+
+	let token = jwt.encode(loggedUser, tokenConfig.secret);
 
   return {
     token: token,
