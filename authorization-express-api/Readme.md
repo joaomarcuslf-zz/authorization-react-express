@@ -14,7 +14,8 @@
         Params may be missing        
       401 - Unauthorized
         User isn't valid      
-      200 - Success
+
+>      200 - Success
         Valid request
          - Body:
           - token
@@ -36,7 +37,8 @@
         Params may be missing        
       409 - Conflict
         User may already exists on the system
-      200 - Success
+
+>      200 - Success
         Valid request
          - Body:
           - DB Object
