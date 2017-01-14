@@ -12,7 +12,8 @@
 
 >      400 - Bad Request
         Params may be missing
-      401 - Unauthorized
+
+>      401 - Unauthorized
         User isn't valid
 
 >      200 - Success
@@ -35,7 +36,8 @@
 
 >      400 - Bad Request
         Params may be missing
-      409 - Conflict
+
+>      409 - Conflict
         User may already exists on the system
 
 >      200 - Success
