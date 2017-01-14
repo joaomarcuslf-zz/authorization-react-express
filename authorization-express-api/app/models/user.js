@@ -14,11 +14,13 @@ class User {
 			User.connection.open(function (err, mongoclient) {
 				mongoclient.collection("users", function (err, collection) {
 					collection.find(user).toArray(function (err, result) {
-						let data = result[0];
+						if (result) {
+							let data = result[0];
 
-						if (data && typeof data === "object") {
-							resolve(data);
-							return;
+							if (data && typeof data === "object") {
+								resolve(data);
+								return;
+							}
 						}
 						reject();
 					});
