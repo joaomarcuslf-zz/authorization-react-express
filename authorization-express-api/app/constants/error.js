@@ -16,5 +16,9 @@ module.exports = {
 
 	// No token
 	NO_TOKEN: 'ERROR: NO TOKEN FOUND',
-	NO_TOKEN_MESSAGE: 'User client has no token'
+	NO_TOKEN_MESSAGE: 'User client has no token',
+
+	// Invalid token
+	INVALID_TOKEN: 'ERROR: INVALID TOKEN GIVEN',
+	INVALID_TOKEN_TOKEN_MESSAGE: 'User client has an invalid token'
 };
