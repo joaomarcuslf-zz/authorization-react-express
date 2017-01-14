@@ -1,22 +1,44 @@
 'use strict';
 let httpStatus = require('../constants/httpStatus');
 let errorContants = require('../constants/error');
+let tokenHelper = require('../helpers/tokenHelper');
+
 
 module.exports = function (request, response, next) {
+	let token = request.headers['x-access-token'];
 
-	if (request.url.includes('login')) {
-		next();
-	} else {
-		let hasToken = (request.body && request.body.access_token) || (request.query && request.query.access_token) || request.headers['x-access-token'];
+	if (!token) {
+		response
+			.status(httpStatus.UNAUTHORIZED)
+			.send({
+					error: errorContants.NO_TOKEN,
+					message: errorContants.NO_TOKEN_MESSAGE
+			});
+		return;
+	}
 
-		if (hasToken) {
-			next();
-		} else {
-			response.status(httpStatus.UNAUTHORIZED)
+	try {
+		let decodedUser = tokenHelper.getTokenData(token);
+		let isExpired = moment(decodedUser.expires).isBefore(new Date());
+
+		if (isExpired) {
+			response
+				.status(httpStatus.UNAUTHORIZED)
 				.send({
-						error: errorContants.NO_TOKEN,
-						message: errorContants.NO_TOKEN_MESSAGE
+						error: errorContants.EXPIRED_TOKEN,
+						message: errorContants.EXPIRED_TOKEN_MESSAGE
 				});
+			return;
+		} else {
+			next();
 		}
+
+	} catch (err) {
+		response
+			.status(httpStatus.UNAUTHORIZED)
+			.send({
+					error: errorContants.NO_TOKEN,
+					message: errorContants.NO_TOKEN_MESSAGE
+			});
 	}
 };
