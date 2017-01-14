@@ -26,7 +26,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "node ./node_modules/mocha/bin/mocha -c --ui bdd ./specs/**/*.spec.js",
+    "bdd": "nodemon ./node_modules/mocha/bin/mocha -c --ui bdd ./specs/**/*.spec.js"
   },
   "author": "João Marcus Fernandes <jmarcusfernandes@gmail.com>",
   "license": "MIT",
