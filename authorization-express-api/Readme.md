@@ -9,18 +9,18 @@
 		  - password
   - Response:
     - Status:
-    
+
 >      400 - Bad Request
-        Params may be missing        
+        Params may be missing
       401 - Unauthorized
-        User isn't valid      
+        User isn't valid
 
 >      200 - Success
         Valid request
          - Body:
           - token
           - user
-          - date
+          - expires
 
 ---
 
@@ -32,9 +32,9 @@
       - email
   - Response:
     - Status:
-    
+
 >      400 - Bad Request
-        Params may be missing        
+        Params may be missing
       409 - Conflict
         User may already exists on the system
 

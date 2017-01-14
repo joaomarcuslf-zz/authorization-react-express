@@ -6,22 +6,7 @@ const cryptHelper = require('../helpers/cryptoHelper');
 const validationHelper = require('../helpers/validationHelper');
 const dbConnection = require('../../configs/dbConnection');
 const userModel = require('../models/user')(dbConnection);
-
-function genToken(user) {
-  let loggedDate = new Date();
-
-	let loggedUser = {
-		username: user.username,
-		date: loggedDate
-	}
-
-	let token = tokenHelper.generateToken(loggedUser);
-
-  return {
-    token: token,
-    user: loggedUser
-  };
-}
+const moment = require('moment');
 
 class AuthController {
 	login(request, response) {
@@ -59,6 +44,20 @@ class AuthController {
 			username: request.body.username,
 			password: cryptHelper.generatePasswordHash(request.body.password)
 		};
+
+		function genToken(user) {
+			let loggedUser = {
+				username: user.username,
+				expires: moment().add(7, 'days').valueOf()
+			}
+
+			let token = tokenHelper.generateToken(loggedUser);
+
+			return {
+				token: token,
+				user: loggedUser
+			};
+		}
 
 		function authorizeSucess(data) {
 			response.status(httpStatus.SUCCESS)
