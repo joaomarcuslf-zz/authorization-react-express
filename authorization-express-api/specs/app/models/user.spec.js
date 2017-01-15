@@ -17,7 +17,7 @@ let mockedUsers = [
 ];
 
 describe('User', function () {
-	before(function (done) {
+	beforeEach(function (done) {
 		connection().open(function (err, mongoclient) {
 			mongoclient.collection("users", function (err, collection) {
 				collection.insert(mockedUsers);
@@ -28,7 +28,7 @@ describe('User', function () {
 		});
 	});
 
-	after(function (done) {
+	afterEach(function (done) {
 		connection().open(function (err, mongoclient) {
 			mongoclient.collection("users", function (err, collection) {
 				collection.remove({});
@@ -124,7 +124,7 @@ describe('User', function () {
 		it('should insert succesfully an document(test 2)', function (done) {
 			this.timeout(4000);
 			let username = 'mock12';
-			let expectedResult = mockedUsers.length + 3;
+			let expectedResult = mockedUsers.length + 1;
 
 			user
 				.insert({ username: username })
