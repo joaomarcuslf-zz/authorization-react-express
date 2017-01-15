@@ -9,7 +9,9 @@ const httpStatus = require('../app/constants/httpStatus');
 
 const application = express();
 
-application.use(morgan('dev'));
+if (process.env.NODE_ENV !== 'test') {
+  application.use(morgan('dev'));
+}
 
 application.use(bodyParser.urlencoded({extended: true}));
 application.use(bodyParser.json());
