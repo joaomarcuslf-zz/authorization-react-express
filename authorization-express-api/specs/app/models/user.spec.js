@@ -40,11 +40,13 @@ describe('User', function () {
 	});
 
 	describe('findUser', function () {
-		it('should return an promise', function () {
+		it('should return an promise', function (done) {
 			this.timeout(4000);
 			let result = user.findUser({});
 
 			expect(typeof result.then).to.be.equal('function');
+
+			result.then(function() { done() }).catch(function() { done() });
 		});
 
 		it('should fetch the requested user(test 1)', function (done) {

@@ -161,4 +161,7 @@ describe('auth routes', function () {
 			});
 		});
 	});
+
+	describe('POST /api/v1/signup', function() {
+	});
 });
