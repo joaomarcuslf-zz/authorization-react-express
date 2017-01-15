@@ -31,6 +31,7 @@ module.exports = function (request, response, next) {
 				});
 			return;
 		} else {
+			request.user = decodedUser;
 			next();
 		}
 

@@ -50,6 +50,50 @@ class User {
 		});
 	}
 
+	update(query, user) {
+		let User = this;
+
+		return new Promise(function (resolve, reject) {
+			User.connection.open(function (err, mongoclient) {
+				mongoclient.collection("users", function (err, collection) {
+					collection.update(query, user, function (err, data) {
+						if (err) {
+							reject();
+							return;
+						}
+
+						resolve(data);
+					});
+
+					mongoclient.close();
+				});
+			});
+		});
+	}
+
+	delete(query) {
+		let User = this;
+
+		return new Promise(function (resolve, reject) {
+			User.connection.open(function (err, mongoclient) {
+				mongoclient.collection("users", function (err, collection) {
+					collection.remove(query, {
+						justOne: true
+					}, function (err, data) {
+						if (err) {
+							reject();
+							return;
+						}
+
+						resolve(data);
+					});
+
+					mongoclient.close();
+				});
+			});
+		});
+	}
+
 	insert(user) {
 		let User = this;
 
