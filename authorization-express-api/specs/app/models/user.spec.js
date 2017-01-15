@@ -46,7 +46,7 @@ describe('User', function () {
 
 			expect(typeof result.then).to.be.equal('function');
 
-			result.then(function() { done() }).catch(function() { done() });
+			result.then(function () { done() }).catch(function () { done() });
 		});
 
 		it('should fetch the requested user(test 1)', function (done) {

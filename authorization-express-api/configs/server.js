@@ -25,6 +25,13 @@ require('../app/routes/auth')(
   application
 );
 
+require('../app/routes/user')(
+  'api',
+  'v1',
+  application,
+  [require('../app/middlewares/validateRequest')]
+);
+
 application.use((request, response) => {
   let notFoundResource = {
     status: httpStatus.NOT_FOUND,
