@@ -4,7 +4,22 @@ const httpStatus = require('../constants/httpStatus');
 const tokenHelper = require('../helpers/tokenHelper');
 const cryptHelper = require('../helpers/cryptoHelper');
 const validationHelper = require('../helpers/validationHelper');
-const dbConnection = require('../../configs/dbConnection');
+
+// Choosing the enviroment DB
+let dbConnection;
+
+switch (process.env.NODE_ENV) {
+	case 'test':
+		dbConnection = require('../../configs/dbConnection.test');
+		break;
+	case 'prod':
+		dbConnection = require('../../configs/dbConnection.prod');
+		break;
+	default:
+		dbConnection = require('../../configs/dbConnection.dev');
+		break;
+}
+
 const userModel = require('../models/user')(dbConnection);
 const moment = require('moment');
 
