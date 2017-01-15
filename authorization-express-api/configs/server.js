@@ -9,10 +9,6 @@ const httpStatus = require('../app/constants/httpStatus');
 
 const application = express();
 
-application.use(express.static('./assets'));
-application.use(express.static('./build'));
-application.use(express.static('./'));
-
 application.use(morgan('dev'));
 
 application.use(bodyParser.urlencoded({extended: true}));
