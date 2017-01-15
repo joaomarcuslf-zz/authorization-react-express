@@ -41,47 +41,50 @@ describe('User', function () {
 
 	describe('findUser', function () {
 		it('should return an promise', function () {
-			this.timeout(3000);
+			this.timeout(4000);
 			let result = user.findUser({});
 
 			expect(typeof result.then).to.be.equal('function');
 		});
 
 		it('should fetch the requested user(test 1)', function (done) {
-			this.timeout(3000);
+			this.timeout(4000);
 			let username = 'mock0';
 			user
 				.findUser({ username: username })
 				.then(function (data) {
 					expect(data.username).to.be.equal(username);
 					done();
-				});
+				})
+				.catch(done);
 		});
 
 		it('should fetch the requested user(test 2)', function (done) {
-			this.timeout(3000);
+			this.timeout(4000);
 			let username = 'mock1';
 			user
 				.findUser({ username: username })
 				.then(function (data) {
 					expect(data.username).to.be.equal(username);
 					done();
-				});
+				})
+				.catch(done);
 		});
 
 		it('should fetch the requested user(test 3)', function (done) {
-			this.timeout(3000);
+			this.timeout(4000);
 			let username = 'mock2';
 			user
 				.findUser({ username: username })
 				.then(function (data) {
 					expect(data.username).to.be.equal(username);
 					done();
-				});
+				})
+				.catch(done);
 		});
 
 		it('should reject for not found user', function (done) {
-			this.timeout(3000);
+			this.timeout(4000);
 			let username = 'mock10';
 			user
 				.findUser({ username: username })
@@ -95,14 +98,14 @@ describe('User', function () {
 
 	describe('insert', function () {
 		it('should return an promise', function () {
-			this.timeout(3000);
+			this.timeout(4000);
 			let result = user.insert({});
 
 			expect(typeof result.then).to.be.equal('function');
 		});
 
 		it('should insert succesfully an document(test 1)', function (done) {
-			this.timeout(3000);
+			this.timeout(4000);
 			let username = 'mock11';
 
 			user
@@ -113,12 +116,13 @@ describe('User', function () {
 						.then(function (data) {
 							expect(data.username).to.be.equal(username);
 							done();
-						});
+						})
+						.catch(done);
 				});
 		});
 
 		it('should insert succesfully an document(test 2)', function (done) {
-			this.timeout(3000);
+			this.timeout(4000);
 			let username = 'mock12';
 			let expectedResult = mockedUsers.length + 3;
 
@@ -135,7 +139,8 @@ describe('User', function () {
 							mongoclient.close();
 						});
 					});
-				});
+				})
+				.catch(done);
 			});
 		});
 	});
