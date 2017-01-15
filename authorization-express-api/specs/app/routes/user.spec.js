@@ -14,7 +14,7 @@ let userMocked = {
 const app = require('../../../configs/server');
 
 describe('user routes', function () {
-	describe('POST /api/v1/user', function () {
+	describe('ALL /api/v1/user*', function () {
 		let url = '/api/v1/user';
 		describe('with no token', function () {
 			it('should have content type json', function (done) {

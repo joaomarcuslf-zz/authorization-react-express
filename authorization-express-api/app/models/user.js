@@ -31,6 +31,25 @@ class User {
 		});
 	}
 
+	findUsers() {
+		let User = this;
+		return new Promise(function (resolve, reject) {
+			User.connection.open(function (err, mongoclient) {
+				mongoclient.collection("users", function (err, collection) {
+					collection.find({}).toArray(function (err, result) {
+						if (result) {
+							resolve(result);
+							return;
+						}
+						reject(err);
+					});
+
+					mongoclient.close();
+				});
+			});
+		});
+	}
+
 	insert(user) {
 		let User = this;
 
