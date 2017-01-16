@@ -154,7 +154,8 @@ class AuthController {
 			.catch(function () {
 				userModel
 					.insert(user)
-					.then(insertSuccess);
+					.then(insertSuccess)
+					.catch(insertError);
 			});
 	}
 }

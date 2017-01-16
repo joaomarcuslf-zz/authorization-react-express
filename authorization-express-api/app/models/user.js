@@ -100,6 +100,10 @@ class User {
 		return new Promise(function (resolve, reject) {
 			User.connection.open(function (err, mongoclient) {
 				mongoclient.collection("users", function (err, collection) {
+					if (err) {
+						reject();
+						return;
+					}
 					collection.insert(user);
 					resolve(user);
 
