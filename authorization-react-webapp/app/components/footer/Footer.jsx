@@ -1,28 +1,30 @@
 /* @flow */
 import React from 'react';
-export default class Footer extends React.Component {
-  constructor() {
-    super();
+
+const footerStyles = {
+  'position': 'absolute',
+  'bottom': '0',
+  'width': '100%',
+  'height': '40px'
+};
+
+const Footer = ({ children, profileURL }: object): ?React$Element<footer> => {
+  if (!children) {
+    return <footer />;
   }
 
-  shouldComponentUpdate(): boolean {
-    return false;
-  }
+  return (
+    <footer id='footer' className='footer hero is-dark is-bold' style={footerStyles}>
+      <p className='subtitle has-text-centered'>
+      Made with {'<3'} by <a href={profileURL}>{children}</a>
+      </p>
+    </footer>
+  );
+};
 
-  render(): ?React$Element<footer> {
-    const footerStyles = {
-      'position': 'absolute',
-      'bottom': '0',
-      'width': '100%',
-      'height': '40px'
-    };
+Footer.propTypes = {
+  children: React.PropTypes.node,
+  profileURL: React.PropTypes.string
+};
 
-    return (
-      <footer id='footer' className='footer hero is-dark is-bold' style={footerStyles}>
-        <p className='subtitle has-text-centered'>
-          Made by: <a href="http://joaomarcuslf.github.io/">@joaomarcuslf</a>
-        </p>
-      </footer>
-    );
-  }
-}
+export default Footer;

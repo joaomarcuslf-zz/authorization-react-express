@@ -1,24 +1,18 @@
 /* @flow */
 import React from 'react';
 
-export default class Navbar extends React.Component {
-  constructor() {
-    super();
-  }
+const Navbar = (): ?React$Element<nav> => {
+  return (
+    <nav id='nav' className='nav has-shadow hero is-primary is-bold'>
+      <header className='nav-left'>
+        <h2 className='nav-item is-brand title'>
+          Front-end Boilerplate
+        </h2>
+      </header>
+    </nav>
+  );
+};
 
-  shouldComponentUpdate(): boolean {
-    return false;
-  }
+Navbar.propTypes = {};
 
-  render(): ?React$Element<nav> {
-    return (
-      <nav id='nav' className='nav has-shadow hero is-primary is-bold'>
-        <header className='nav-left'>
-          <h2 className='nav-item is-brand title'>
-            Front-end Boilerplate
-          </h2>
-        </header>
-      </nav>
-    );
-  }
-}
+export default Navbar;
