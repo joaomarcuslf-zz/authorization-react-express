@@ -126,7 +126,7 @@
     "fp/no-nil": 2,
     "fp/no-proxy": 2,
     "fp/no-rest-parameters": 2,
-    "fp/no-this": 2,
+    "fp/no-this": 1,
     "fp/no-throw": 2,
     "fp/no-unused-expression": 2,
     "fp/no-valueof-field": 2
