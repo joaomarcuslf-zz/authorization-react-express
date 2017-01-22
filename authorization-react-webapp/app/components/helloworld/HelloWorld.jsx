@@ -10,13 +10,13 @@ const HelloWorld = (): ?React$Element<section> => {
             Hello World,
           </h1>
           <div className='subtitle has-text-centered'>
-            <h2>this is the Front-end boilerplate</h2>
+            <h2><a href='https://github.com/joaomarcuslf/authorization-react-express'>Project Page</a></h2>
             <hr />
             <p className='container'>
-              Check the project page on <a href='https://github.com/joaomarcuslf/frontend-boilerplate'>Github</a>,
+              This is a small application, using React with Redux and Express REST API.
               <br />
-              Also check the <a href='https://github.com/joaomarcuslf/frontend-boilerplate/blob/master/README.md'>
-              README.md</a> for the complete explanation of how to start this.
+              In this application both API and Webapp set communication via JSON, each one
+              has each own responsible.
             </p>
           </div>
         </div>

@@ -1,5 +1,6 @@
 /* @flow */
 import React from 'react';
+import { Link } from 'react-router';
 
 const LoginPage = (): ?React$Element<section> => {
   return(
@@ -9,7 +10,32 @@ const LoginPage = (): ?React$Element<section> => {
           <h1 className='title has-text-centered'>
             Login Page
           </h1>
-          <div className='subtitle has-text-centered' />
+          <form className='subtitle has-shadow'>
+						<label className='label'>Username:</label>
+						<p className='control'>
+							<input className='input' type='text' placeholder='Type your username' />
+						</p>
+						<label className='label'>Password:</label>
+						<p className='control'>
+							<input className='input' type='password' placeholder='Type your password' />
+						</p>
+
+						<div className='control is-grouped is-pulled-right'>
+							<p className='control'>
+								<Link to='/register'>Don't have a account yet?</Link>
+							</p>
+							<p className='control'>
+								<Link to='/'>
+									<button type='submit' className='button is-primary'>Submit</button>
+								</Link>
+							</p>
+							<p className='control'>
+								<Link to='/'>
+									<button className='button is-danger'>Cancel</button>
+								</Link>
+							</p>
+						</div>
+					</form>
         </div>
       </div>
     </section>
