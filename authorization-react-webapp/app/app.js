@@ -9,6 +9,8 @@ import 'whatwg-fetch';
 
 import Container from './components/Container.jsx';
 import HelloWorld from './components/helloworld/HelloWorld.jsx';
+import RegisterPage from './components/register/RegisterPage.jsx';
+import LoginPage from './components/login/LoginPage.jsx';
 
 import reducers from './reducers';
 
@@ -19,6 +21,8 @@ render(
     <Router history={hashHistory}>
       <Route path='/' component={Container}>
         <IndexRoute component={HelloWorld} />
+        <Route path='/register' component={RegisterPage} />
+        <Route path='/login' component={LoginPage} />
       </Route>
     </Router>
   </Provider>,
