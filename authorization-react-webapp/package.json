@@ -50,6 +50,7 @@
   },
   "scripts": {
     "start": "npm run build && npm run dev",
+    "test": "gulp run:test",
     "build": "gulp run:build && npm run build:js",
     "build:js": "webpack --minimize",
     "bundle:js": "webpack",

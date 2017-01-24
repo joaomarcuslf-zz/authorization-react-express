@@ -10,9 +10,12 @@
     "foreman": "^2.0.0"
   },
   "scripts": {
-    "start": "npm install --silent && npm run start-api && npm run start-webapp",
-    "start-api": "cd authorization-express-api && npm install --silent",
-    "start-webapp": "cd authorization-react-webapp && npm install --silent",
+    "install-dependencies": "npm install --silent && npm run install-api && npm run install-webapp",
+    "test": "npm run test-api && npm run test-webapp",
+    "install-api": "cd authorization-express-api && npm install",
+    "install-webapp": "cd authorization-react-webapp && npm install",
+    "test-api": "cd authorization-express-api && npm test",
+    "test-webapp": "cd authorization-react-webapp && npm test",
     "dev": "nf start"
   },
   "author": "João Marcus Fernandes <jmarcusfernandes@gmail.com>",

@@ -3,7 +3,6 @@ node_js:
   - "node"
 services: mongodb
 before_script:
-  - cd authorization-express-api
-  - npm install
+  - npm install-dependencies
 script:
   - npm test
