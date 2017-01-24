@@ -6,7 +6,6 @@ const concat = require('gulp-concat');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const sass = require('gulp-sass');
-const exec = require('child_process').exec;
 const cssBeautify = require('gulp-cssbeautify');
 const cssComb = require('gulp-csscomb');
 
@@ -17,11 +16,6 @@ gulp.task('default', () => {
 });
 
 // Bundle
-
-gulp.task('bundle:js', () => {
-  gutil.log('Starting bundle js files task');
-  return exec('npm run bundle:js');
-});
 
 gulp.task('bundle:scss', () => {
   gutil.log('Starting bundle scss files task');
@@ -59,7 +53,7 @@ gulp.task('bdd', () => {
 
 // Build
 
-gulp.task('run:build', ['build:js', 'build:scss'], () => {});
+gulp.task('run:build', ['build:scss'], () => {});
 
 gulp.task('build:js', () => {
   return exec('npm run build:js');
@@ -93,3 +87,4 @@ gulp.task('run:test', () => {
   		}
   	}));
 });
+
