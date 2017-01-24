@@ -5,6 +5,5 @@ services: mongodb
 before_script:
   - cd authorization-express-api
   - npm install
-  - npm test
 script:
-  - npm run start
+  - npm test
