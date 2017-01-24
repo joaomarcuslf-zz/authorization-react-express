@@ -3,7 +3,6 @@ node_js:
   - "node"
 services: mongodb
 before_script:
-  - sudo /etc/init.d/mongod start
   - cd authorization-express-api
   - npm install
   - npm test
