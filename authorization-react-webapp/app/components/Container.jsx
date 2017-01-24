@@ -5,7 +5,7 @@ import Footer from './footer/Footer.jsx';
 
 const Container = ({ children }: object): ?React$Element<div> => {
     return(
-      <div>
+      <div className='app-container'>
         <Navbar />
 
         {children}

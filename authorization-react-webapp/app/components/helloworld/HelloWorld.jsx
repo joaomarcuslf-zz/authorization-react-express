@@ -3,7 +3,7 @@ import React from 'react';
 
 const HelloWorld = (): ?React$Element<section> => {
   return(
-    <section className='hero is-light'>
+    <section className='app-body hero is-light'>
       <div className='hero-body'>
         <div className='container'>
           <h1 className='title has-text-centered'>

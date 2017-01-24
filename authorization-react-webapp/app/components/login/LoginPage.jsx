@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 const LoginPage = (): ?React$Element<section> => {
   return(
-    <section className='hero is-light'>
+    <section className='app-body hero is-light'>
       <div className='hero-body'>
         <div className='container'>
           <h1 className='title has-text-centered'>
@@ -19,11 +19,11 @@ const LoginPage = (): ?React$Element<section> => {
 						<p className='control'>
 							<input className='input' type='password' placeholder='Type your password' />
 						</p>
+						<p className='control'>
+							<Link to='/register'>Don't have an account yet?</Link>
+						</p>
 
 						<div className='control is-grouped is-pulled-right'>
-							<p className='control'>
-								<Link to='/register'>Don't have a account yet?</Link>
-							</p>
 							<p className='control'>
 								<Link to='/'>
 									<button type='submit' className='button is-primary'>Submit</button>

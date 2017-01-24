@@ -1,6 +1,6 @@
 {
   "name": "authorization-react-webapp",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Authorization React Webapp",
   "main": "index.js",
   "engines": {

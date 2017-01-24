@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 const RegisterPage = (): ?React$Element<section> => {
   return(
-    <section className='hero is-light'>
+    <section className='app-body hero is-light'>
       <div className='hero-body'>
         <div className='container'>
           <h1 className='title has-text-centered'>
@@ -23,11 +23,11 @@ const RegisterPage = (): ?React$Element<section> => {
 						<p className='control'>
 							<input className='input' type='email' placeholder='Type your e-mail' />
 						</p>
+            <p className='control'>
+						  <Link to='/login'>Already have an account?</Link>
+						</p>
 
 						<div className='control is-grouped is-pulled-right'>
-							<p className='control'>
-								<Link to='/login'>Already have a account?</Link>
-							</p>
 							<p className='control'>
 								<Link to='/'>
 									<button type='submit' className='button is-primary'>Submit</button>

@@ -22,3 +22,10 @@
   'objects/objects',
   'components/components',
   'trumps/trumps';
+
+.app-container {
+  max-height: 100vh;
+  .app-body {
+    height: calc(100vh - 50px);
+  }
+}
