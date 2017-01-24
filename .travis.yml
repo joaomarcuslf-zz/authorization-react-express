@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "node"
+before_script:
+  - cd authorization-express-api
+  - npm install
+  - npm test
+script:
+  - npm run start
