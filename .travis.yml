@@ -3,6 +3,6 @@ node_js:
   - "node"
 services: mongodb
 before_script:
-  - npm install-dependencies
+  - npm run install-dependencies
 script:
   - npm test
