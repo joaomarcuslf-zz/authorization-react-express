@@ -1,15 +1,8 @@
 'use strict';
 
-const mongo = require('mongodb');
+const mongoose = require('mongoose');
 
 const connMongoDB = function(){
-	let db = new mongo.Db(
-		'authorization-react-express-tests',
-		new mongo.Server('localhost', 27017, {}),
-		{}
-	);
-
-	return db;
+  return mongoose.createConnection('mongodb://localhost:27017/authorization-react-express-tests');
 }
-
 module.exports = connMongoDB;

@@ -18,25 +18,14 @@ let mockedUsers = [
 
 describe('User', function () {
 	beforeEach(function (done) {
-		connection().open(function (err, mongoclient) {
-			mongoclient.collection("users", function (err, collection) {
-				collection.insert(mockedUsers);
-
-				mongoclient.close();
-				done();
-			});
-		});
+		let conn = connection();
+		conn.model('user', {username: String,  password: String, email: String}).insertMany(mockedUsers);
+		done();
 	});
 
 	afterEach(function (done) {
-		connection().open(function (err, mongoclient) {
-			mongoclient.collection("users", function (err, collection) {
-				collection.remove({});
-
-				mongoclient.close();
-				done();
-			});
-		});
+		let conn = connection();
+		conn.model('user', {username: String,  password: String, email: String}).remove({}, done);
 	});
 
 	describe('findUser', function () {
@@ -131,15 +120,10 @@ describe('User', function () {
 			user
 				.insert({ username: username })
 				.then(function (data) {
-					connection().open(function (err, mongoclient) {
-						mongoclient.collection("users", function (err, collection) {
-							collection.find({}).toArray(function (err, result) {
-								expect(result.length).to.be.equal(expectedResult);
-								done();
-							});
-
-							mongoclient.close();
-						});
+					let conn = connection();
+					conn.model('user', {username: String,  password: String, email: String}).find({}).exec(function (err, result) {
+						expect(result.length).to.be.equal(expectedResult);
+						done();
 					});
 				})
 				.catch(done);

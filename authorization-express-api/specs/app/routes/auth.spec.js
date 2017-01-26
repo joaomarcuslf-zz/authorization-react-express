@@ -116,25 +116,16 @@ describe('auth routes', function () {
 
 		describe('with valid body and registered', function () {
 			beforeEach(function (done) {
-				connection().open(function (err, mongoclient) {
-					mongoclient.collection("users", function (err, collection) {
-						collection.insert(userMocked);
+				let conn = connection();
+				let User = conn.model('user', {username: String,  password: String, email: String});
+				let userToSave = new User(userMocked);
 
-						mongoclient.close();
-						done();
-					});
-				});
+				userToSave.save(done);
 			});
 
 			afterEach(function (done) {
-				connection().open(function (err, mongoclient) {
-					mongoclient.collection("users", function (err, collection) {
-						collection.remove({});
-
-						mongoclient.close();
-						done();
-					});
-				});
+				let conn = connection();
+				conn.model('user', {username: String,  password: String, email: String}).remove(userMocked, done);
 			});
 
 			it('should have content type json', function(done) {
@@ -154,7 +145,7 @@ describe('auth routes', function () {
 					.send({ "username": "mock0", "password": "mock0" })
 					.expect('Content-Type', /json/)
 					.expect(200)
-					.end(function(err, res) {
+					.end(function (err, res) {
 						if (err) return done(err);
 						done();
 					});
@@ -244,25 +235,16 @@ describe('auth routes', function () {
 
 		describe('valid body but conflict user', function () {
 			beforeEach(function (done) {
-				connection().open(function (err, mongoclient) {
-					mongoclient.collection("users", function (err, collection) {
-						collection.insert(userMocked);
+				let conn = connection();
+				let User = conn.model('user', {username: String,  password: String, email: String});
+				let userToSave = new User(userMocked);
 
-						mongoclient.close();
-						done();
-					});
-				});
+				userToSave.save(done);
 			});
 
 			afterEach(function (done) {
-				connection().open(function (err, mongoclient) {
-					mongoclient.collection("users", function (err, collection) {
-						collection.remove({});
-
-						mongoclient.close();
-						done();
-					});
-				});
+				let conn = connection();
+				conn.model('user', {username: String,  password: String, email: String}).remove(userMocked, done);
 			});
 
 			it('should have content type json', function(done) {
@@ -291,14 +273,8 @@ describe('auth routes', function () {
 
 		describe('valid body and new user', function () {
 			beforeEach(function (done) {
-				connection().open(function (err, mongoclient) {
-					mongoclient.collection("users", function (err, collection) {
-						collection.remove({});
-
-						mongoclient.close();
-						done();
-					});
-				});
+				let conn = connection();
+				conn.model('user', {username: String,  password: String, email: String}).remove(userMocked, done);
 			});
 
 			it('should have content type json', function(done) {

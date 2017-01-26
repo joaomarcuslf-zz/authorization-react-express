@@ -2,7 +2,8 @@
 
 class User {
 	constructor(connection) {
-		this.connection = connection();
+    this.connection = connection();
+    this.model = this.connection.model('user', {username: String,  password: String, email: String});
 
 		this.insert = this.insert.bind(this);
 		this.findUser = this.findUser.bind(this);
@@ -11,22 +12,12 @@ class User {
 	findUser(user) {
 		let User = this;
 		return new Promise(function (resolve, reject) {
-			User.connection.open(function (err, mongoclient) {
-				mongoclient.collection("users", function (err, collection) {
-					collection.find(user).toArray(function (err, result) {
-						if (result) {
-							let data = result[0];
-
-							if (data && typeof data === "object") {
-								resolve(data);
-								return;
-							}
-						}
-						reject();
-					});
-
-					mongoclient.close();
-				});
+			User.model.findOne(user, 'username email', function (err, result) {
+				if (result && typeof result === "object") {
+					resolve(result);
+					return;
+				}
+				reject();
 			});
 		});
 	}
@@ -34,19 +25,15 @@ class User {
 	findUsers() {
 		let User = this;
 		return new Promise(function (resolve, reject) {
-			User.connection.open(function (err, mongoclient) {
-				mongoclient.collection("users", function (err, collection) {
-					collection.find({}).toArray(function (err, result) {
-						if (result) {
-							resolve(result);
-							return;
-						}
-						reject(err);
-					});
-
-					mongoclient.close();
+			User.model
+				.find({})
+				.exec(function (err, result) {
+					if (result) {
+						resolve(result);
+						return;
+					}
+					reject(err);
 				});
-			});
 		});
 	}
 
@@ -54,19 +41,13 @@ class User {
 		let User = this;
 
 		return new Promise(function (resolve, reject) {
-			User.connection.open(function (err, mongoclient) {
-				mongoclient.collection("users", function (err, collection) {
-					collection.update(query, user, function (err, data) {
-						if (err) {
-							reject();
-							return;
-						}
+			User.model.update(query, user, function (err, data) {
+				if (err) {
+					reject();
+					return;
+				}
 
-						resolve(data);
-					});
-
-					mongoclient.close();
-				});
+				resolve(data);
 			});
 		});
 	}
@@ -75,21 +56,13 @@ class User {
 		let User = this;
 
 		return new Promise(function (resolve, reject) {
-			User.connection.open(function (err, mongoclient) {
-				mongoclient.collection("users", function (err, collection) {
-					collection.remove(query, {
-						justOne: true
-					}, function (err, data) {
-						if (err) {
-							reject();
-							return;
-						}
+			User.model.remove(query, function (err, data) {
+				if (err) {
+					reject();
+					return;
+				}
 
-						resolve(data);
-					});
-
-					mongoclient.close();
-				});
+				resolve(data);
 			});
 		});
 	}
@@ -98,17 +71,15 @@ class User {
 		let User = this;
 
 		return new Promise(function (resolve, reject) {
-			User.connection.open(function (err, mongoclient) {
-				mongoclient.collection("users", function (err, collection) {
-					if (err) {
-						reject();
-						return;
-					}
-					collection.insert(user);
-					resolve(user);
+			let userToSave = new User.model(user);
 
-					mongoclient.close();
-				});
+			userToSave.save(function (err) {
+				if (err) {
+					reject();
+					return;
+				}
+
+				resolve(userToSave);
 			});
 		});
 	}
