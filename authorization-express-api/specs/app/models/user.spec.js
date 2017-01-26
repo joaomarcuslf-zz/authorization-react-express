@@ -115,14 +115,14 @@ describe('User', function () {
 		it('should insert succesfully an document(test 2)', function (done) {
 			this.timeout(4000);
 			let username = 'mock12';
-			let expectedResult = mockedUsers.length + 1;
+			let oldLen = mockedUsers.length;
 
 			user
 				.insert({ username: username })
 				.then(function (data) {
 					let conn = connection();
 					conn.model('user', {username: String,  password: String, email: String}).find({}).exec(function (err, result) {
-						expect(result.length).to.be.equal(expectedResult);
+						expect(result.length).to.be.above(oldLen);
 						done();
 					});
 				})
