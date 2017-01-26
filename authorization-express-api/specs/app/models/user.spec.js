@@ -130,7 +130,6 @@ describe('User', function () {
 				})
 				.catch(done);
 			});
-		});
-		
 		*/
+		});
 	});
