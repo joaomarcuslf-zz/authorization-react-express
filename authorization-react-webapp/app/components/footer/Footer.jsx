@@ -1,4 +1,3 @@
-/* @flow */
 import React from 'react';
 
 const footerStyles = {
@@ -8,7 +7,7 @@ const footerStyles = {
   'height': '40px'
 };
 
-const Footer = ({ children, profileURL }: object): ?React$Element<footer> => {
+const Footer = ({ children, profileURL }) => {
   if (!children) {
     return <footer />;
   }

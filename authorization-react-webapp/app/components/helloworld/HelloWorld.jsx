@@ -1,7 +1,6 @@
-/* @flow */
 import React from 'react';
 
-const HelloWorld = (): ?React$Element<section> => {
+const HelloWorld = () => {
   return(
     <section className='app-body hero is-light'>
       <div className='hero-body'>

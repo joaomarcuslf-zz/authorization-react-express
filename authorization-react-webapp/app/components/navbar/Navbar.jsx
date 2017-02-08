@@ -1,8 +1,7 @@
-/* @flow */
 import React from 'react';
 import { Link } from 'react-router';
 
-const Navbar = (): ?React$Element<nav> => {
+const Navbar = () => {
   return (
     <nav id='nav' className='nav has-shadow hero is-bold'>
       <header className='nav-left is-fullwidth'>

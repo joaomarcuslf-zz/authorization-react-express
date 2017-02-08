@@ -1,8 +1,7 @@
-/* @flow */
 import React from 'react';
 import { Link } from 'react-router';
 
-const RegisterPage = (): ?React$Element<section> => {
+const RegisterPage = () => {
   return(
     <section className='app-body hero is-light'>
       <div className='hero-body'>
