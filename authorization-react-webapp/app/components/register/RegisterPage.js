@@ -1,14 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router';
+import R from 'ramda';
 
-const hasError = (prop) => prop.touched && prop.error;
+const hasProp = R.curry((prop, obj) => obj[prop] || false);
+const isTouched = hasProp('touched');
+const hasError = hasProp('error');
+const isTouchedAndHasError = R.curry((fn1, fn2, obj) => fn1(obj) && fn2(obj))(isTouched, hasError);
+const isDisable = (...args) => R.map(a => a.error, args).filter(a => a === true).length > 0;
 
 const RegisterPage = ({ fields: { username, password, email }, registerUser }) => (
   <form className="subtitle has-shadow" onSubmit={registerUser}>
     <label className="label" htmlFor="username">Username:</label>
     <p className="control">
       <input
-        className={`input ${hasError(username) ? 'is-danger' : ''}`}
+        className={`input ${isTouchedAndHasError(username) ? 'is-danger' : ''}`}
         type="text"
         placeholder="Type your username"
         {...username}
@@ -17,7 +22,7 @@ const RegisterPage = ({ fields: { username, password, email }, registerUser }) =
     <label className="label" htmlFor="password">Password:</label>
     <p className="control">
       <input
-        className={`input ${hasError(password) ? 'is-danger' : ''}`}
+        className={`input ${isTouchedAndHasError(password) ? 'is-danger' : ''}`}
         type="password"
         placeholder="Type your password"
         {...password}
@@ -26,10 +31,11 @@ const RegisterPage = ({ fields: { username, password, email }, registerUser }) =
     <label className="label" htmlFor="email">E-mail:</label>
     <p className="control">
       <input
-        className={`input ${hasError(email) ? 'is-danger' : ''}`}
+        className={`input ${isTouchedAndHasError(email) ? 'is-danger' : ''}`}
         type="email"
         placeholder="Type your e-mail"
-        {...email} />
+        {...email}
+      />
     </p>
     <p className="control">
       <Link to="/login">Already have an account?</Link>
@@ -37,9 +43,13 @@ const RegisterPage = ({ fields: { username, password, email }, registerUser }) =
 
     <div className="control is-grouped is-pulled-right">
       <p className="control">
-        <Link to="/">
-          <button type="submit" className="button is-primary">Submit</button>
-        </Link>
+        <button
+          type="submit"
+          className="button is-primary"
+          disabled={isDisable(username, password, email)}
+        >
+          Submit
+        </button>
       </p>
       <p className="control">
         <Link to="/">
