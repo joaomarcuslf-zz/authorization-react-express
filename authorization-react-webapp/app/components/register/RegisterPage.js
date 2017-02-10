@@ -1,12 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import R from 'ramda';
-
-const hasProp = R.curry((prop, obj) => obj[prop] || false);
-const isTouched = hasProp('touched');
-const hasError = hasProp('error');
-const isTouchedAndHasError = R.curry((fn1, fn2, obj) => fn1(obj) && fn2(obj))(isTouched, hasError);
-const isDisable = (...args) => R.map(a => a.error, args).filter(a => a === true).length > 0;
+import { isTouched, hasError, isTouchedAndHasError, isDisable } from '../../helpers/index';
 
 const RegisterPage = ({ fields: { username, password, email }, registerUser }) => (
   <form className="subtitle has-shadow" onSubmit={registerUser}>
