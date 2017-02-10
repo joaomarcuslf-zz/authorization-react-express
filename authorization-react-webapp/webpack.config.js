@@ -16,6 +16,8 @@ module.exports = {
     './app/app.js'
   ],
 
+  devtool: 'source-map',
+
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
@@ -30,9 +32,6 @@ module.exports = {
   plugins: plugins,
 
   module: {
-    preLoaders: [
-        { test: [/\.js$/, /\.es6$/, /\.jsx$/], exclude: /node_modules/, loader: 'eslint' }
-    ],
     loaders: [
       {
         test: [/\.js$/, /\.es6$/, /\.jsx$/],
