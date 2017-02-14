@@ -1,18 +1,23 @@
 'use strict';
-let userController = require('../controllers/userController');
+const {
+  getUsers,
+  getUserByUsername,
+  updateUserByUsername,
+  deleteUserByUsername
+} = require('../controllers/userController');
 
 module.exports = function (organization, version, app, middlewares) {
 	app.all(`/${organization}/${version}/user*`, middlewares);
 
   // @route: GET /:organization/:version/login
-  app.get(`/${organization}/${version}/user`, userController.getUsers);
+  app.get(`/${organization}/${version}/user`, getUsers);
 
   // @route: GET /:organization/:version/login/:username
-  app.get(`/${organization}/${version}/user/:username`, userController.getUserByUsername);
+  app.get(`/${organization}/${version}/user/:username`, getUserByUsername);
 
   // @route: PUT /:organization/:version/login/:username
-  app.put(`/${organization}/${version}/user/:username`, userController.updateUserByUsername);
+  app.put(`/${organization}/${version}/user/:username`, updateUserByUsername);
 
   // @route: DELETE /:organization/:version/login/:username
-  app.delete(`/${organization}/${version}/user/:username`, userController.deleteUserByUsername);
+  app.delete(`/${organization}/${version}/user/:username`, deleteUserByUsername);
 };

@@ -1,5 +1,5 @@
 'use strict';
-let crypto = require('crypto');
+const crypto = require('crypto');
 
 class CryptoHelper {
 	constructor(cryptModule) {

@@ -1,10 +1,10 @@
 'use strict';
-let authController = require('../controllers/authController');
+const { login, signup } = require('../controllers/authController');
 
 module.exports = function (organization, version, app) {
   // @route: POST /:organization/:version/login
-  app.post(`/${organization}/${version}/login`, authController.login);
+  app.post(`/${organization}/${version}/login`, login);
 
   // @route: POST /:organization/:version/signup
-  app.post(`/${organization}/${version}/signup`, authController.signup);
+  app.post(`/${organization}/${version}/signup`, signup);
 };

@@ -1,5 +1,5 @@
 'use strict';
-let R = require('ramda');
+const R = require('ramda');
 
 class ValidationHelper {
 	constructor() {
